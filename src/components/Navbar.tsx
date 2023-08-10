@@ -12,7 +12,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
       <Link href={'/'} className="p-8">
         <Title text="Natural Cosmética" large />
       </Link>
-      <div className="p-8 flex justify-between items-center md:border-l-[1px] md:border-t-0 border-t-[1px] border-gray-400">
+      <div className="px-8 flex justify-between items-center md:border-l-[1px] md:border-t-0 border-t-[1px] border-gray-400">
         <NavLinks />
         <ThemeBtn />
       </div>

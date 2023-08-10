@@ -23,8 +23,8 @@ const Themebtn: FC<ThemebtnProps> = ({}) => {
   }
 
   return (
-    <button onClick={handleTheme} className='text-xl'>
-      {theme === 'dark' ? <BiMoon /> : <BiSun />}
+    <button onClick={handleTheme} className="text-xl">
+      {theme === 'dark' && mounted ? <BiMoon /> : <BiSun />}
     </button>
   )
 }

@@ -1,7 +1,7 @@
-import Navbar from '@/components/Navbar'
 import Button from '@/components/ui/Button'
 import Title from '@/components/ui/Title'
 import Image from 'next/image'
+import Link from '@/components/ui/Link'
 
 export default function Home() {
   return (
@@ -19,7 +19,9 @@ export default function Home() {
             <Button label="Ver productos" />
           </div>
         </div>
-        <div className="border-t-[1px] border-gray-400"></div>
+        <div className="px-8 flex justify-start items-center border-t-[1px] border-gray-400">
+          <Link href='/terms' label='Términos y Condiciones' />
+        </div>
       </div>
       <Image
         src="/plant.jpg"

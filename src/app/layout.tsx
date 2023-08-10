@@ -1,10 +1,10 @@
 import Provider from '@/components/Provider'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const montse = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '🌿 Natural Cosmética 🌿',
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-neutral-200 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 transition-all`}
+        className={`${montse.className} bg-neutral-200 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 transition-all cursor-default select-none`}
       >
         <Provider>
           <main className="w-full min-h-screen grid grid-cols-1 grid-rows-[min-content_1fr]">
