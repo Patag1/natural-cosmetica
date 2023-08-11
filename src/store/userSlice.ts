@@ -17,7 +17,11 @@ export const UserSlice = create<UserSliceProps>((set) => ({
   getCurrentUser: async () => {
     await fetch('/api/user')
       .then((res) => res.json())
-      .then((user) => set({ user }))
+      .then((user) => {
+        if (!user.status) {
+          set({ user })
+        }
+      })
       .catch((err) => console.log(err.message))
   },
   getUser: async (payload) => {

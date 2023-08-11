@@ -5,7 +5,7 @@ interface layoutProps {
 }
 
 const layout: FC<layoutProps> = ({ children }) => {
-  return <div>{children}</div>
+  return <div className='flex pt-40 justify-center items-start w-full min-h-screen'>{children}</div>
 }
 
 export default layout
