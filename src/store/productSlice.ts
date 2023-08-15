@@ -1,10 +1,11 @@
 import { create } from 'zustand'
 import { Product } from '@prisma/client'
+import { detailProduct } from '@/types'
 import toast from 'react-hot-toast'
 
 interface ProductSliceProps {
   products: Product[] | []
-  product: Product | null
+  product: detailProduct | null
   getProducts: () => Promise<void>
   getProduct: (payload: string) => Promise<void>
   putProduct: (payload: { id: string; data: Product }) => Promise<void>

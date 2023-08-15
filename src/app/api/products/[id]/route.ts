@@ -9,6 +9,9 @@ export async function GET({ params }: { params: { id: string } }) {
       where: {
         id,
       },
+      include: {
+        feedbacks: true,
+      },
     })
 
     if (!product) {
@@ -26,7 +29,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const { image, title, description, ingredients, category, price, buys } =
+    const { image, title, description, ingredients, price, buys } =
       await req.json()
     const { id } = params
 
@@ -39,7 +42,6 @@ export async function PUT(
         title,
         description,
         ingredients,
-        category,
         price,
         buys,
       },

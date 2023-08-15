@@ -51,10 +51,12 @@ const Page: FC<pageProps> = ({}) => {
 
   return (
     <div className="flex flex-col md:items-center w-full md:mx-0 mx-8">
-      <Title text="Inicia sesión" />
+      <div className="mb-2">
+        <Title text="Inicia sesión" />
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col md:w-96 gap-4"
+        className="flex flex-col md:w-96 gap-6"
       >
         <div className="flex flex-col gap-2">
           <div className="relative w-full">

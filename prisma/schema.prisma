@@ -11,31 +11,31 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
-  email    String @unique
+  email    String  @unique
   hashPass String
   location String
+  admin    Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  cart      String[]
+  cart      Product[]
   orders    Order[]
   feedbacks Feedback[]
 }
 
 model Product {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   image       String
   title       String
   description String
-  ingredients String
-  category    String
+  ingredients String[]
   price       Float
   buys        Int
 
-  User      String[]
+  User      User[]
   orders    Order[]
   feedbacks Feedback[]
 }

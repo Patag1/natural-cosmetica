@@ -13,10 +13,10 @@ interface pageProps {}
 const provinces = [
   'Extranjero',
   'Buenos Aires',
+  'CABA',
   'Catamarca',
   'Chaco',
   'Chubut',
-  'Ciudad Autónoma de Buenos Aires',
   'Córdoba',
   'Corrientes',
   'Entre Ríos',
@@ -34,7 +34,7 @@ const provinces = [
   'Santa Cruz',
   'Santa Fe',
   'Santiago del Estero',
-  'Tierra del Fuego, Antártida e Islas del Atlántico Sur',
+  'Tierra del Fuego',
   'Tucumán',
 ]
 
@@ -85,10 +85,12 @@ const Page: FC<pageProps> = ({}) => {
 
   return (
     <div className="flex flex-col md:items-center w-full md:mx-0 mx-8">
-      <Title text="Registrate" />
+      <div className="mb-2">
+        <Title text="Registrate" />
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col md:w-96 gap-4"
+        className="flex flex-col md:w-96 gap-6"
       >
         <div className="flex flex-col gap-2">
           <div className="relative w-full">
@@ -153,7 +155,7 @@ const Page: FC<pageProps> = ({}) => {
               {...register('location', { required: true })}
               className={`appearance-none w-full bg-transparent border-b-2 ${
                 errors['location'] ? 'border-rose-400' : 'border-neutral-400'
-              } focus:outline-none transition-all text-neutral-700 dark:text-neutral-200 focus:bg-neutral-200 focus:p-4 dark:focus:bg-neutral-900`}
+              } focus:outline-none transition-all text-neutral-700 dark:text-neutral-200 focus:bg-neutral-200 dark:focus:bg-neutral-900`}
             >
               <option value="" disabled>
                 Provincia (ARG)
