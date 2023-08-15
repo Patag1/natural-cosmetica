@@ -19,20 +19,43 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
     if (!user) {
       getCurrentUser()
     }
-  }, [getCurrentUser])
+  }, [user, getCurrentUser])
 
   return (
     <div
       className={`${
         path === '/' &&
         'bg-neutral-200 border-[1px] border-neutral-400  dark:bg-neutral-900 rounded-full'
-      } p-2 relative [&>div]:hover:opacity-100 [&>div]:hover:pointer-events-auto`}
+      } h-full p-2 relative [&>div]:hover:opacity-100 [&>div]:hover:pointer-events-auto`}
     >
-      <div className="flex items-center text-2xl">
+      <div className="h-full flex items-center text-2xl">
         <AiOutlineUser />
         <RiArrowDropDownLine />
       </div>
-      <div className="z-20 flex justify-start items-center flex-col p-4 h-fit w-32 bg-neutral-200 dark:bg-neutral-900 absolute top-full right-0 opacity-0 rounded-md border-[1px] border-gray-400 transition-all duration-300 pointer-events-none">
+      <div
+        className="
+          absolute
+          top-full
+          right-0
+          z-20
+          h-fit
+          w-32
+          p-4
+          flex
+          flex-col
+          justify-start
+          items-center
+          bg-neutral-200
+          dark:bg-neutral-900
+          opacity-0
+          border-[1px]
+          border-gray-400
+          rounded-md
+          transition-all
+          duration-300
+          pointer-events-none
+        "
+      >
         {!user ? (
           <>
             <Link href="/login" label="Inicia sesión" />
@@ -40,7 +63,11 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
             <Link href="/signup" label="Registrarse" />
           </>
         ) : (
-          <></>
+          <>
+            <Link href="/orders" label="Ordenes" />
+            <div className="border-b-[1px] border-gray-400 w-full my-4"></div>
+            <Link href="/signout" label="Cerrar sesión" />
+          </>
         )}
         <div className="border-b-[1px] border-gray-400 w-full my-4"></div>
         <ThemeBtn />

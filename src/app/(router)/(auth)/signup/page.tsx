@@ -60,13 +60,13 @@ const Page: FC<pageProps> = ({}) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setLoading(true)
 
-    return await fetch('/api/signup', {
+    return await fetch('/api/register', {
       method: 'POST',
       body: JSON.stringify(data),
     })
       .then(() => {
         toast.success('Registrado exitosamente!')
-        router.push('/products')
+        router.push('/login')
       })
       .catch(() => {
         toast.error('Error! Intente denuevo más tarde')
@@ -100,7 +100,7 @@ const Page: FC<pageProps> = ({}) => {
               {...register('name', { required: true })}
               className={`w-full bg-transparent border-b-2 ${
                 errors['name'] ? 'border-rose-400' : 'border-neutral-400'
-              } focus:outline-none transition-all`}
+              } focus:outline-none focus:p-4 transition-all`}
             />
             {errors['name'] && (
               <label className="absolute right-1 top-1 text-rose-400 text-xs pointer-events-none">
@@ -120,7 +120,7 @@ const Page: FC<pageProps> = ({}) => {
               })}
               className={`w-full bg-transparent border-b-2 ${
                 errors['email'] ? 'border-rose-400' : 'border-neutral-400'
-              } focus:outline-none transition-all`}
+              } focus:outline-none focus:p-4 transition-all`}
             />
             {errors['email'] && (
               <label className="absolute right-1 top-1 text-rose-400 text-xs pointer-events-none">
@@ -137,7 +137,7 @@ const Page: FC<pageProps> = ({}) => {
               {...register('password', { required: true })}
               className={`w-full bg-transparent border-b-2 ${
                 errors['password'] ? 'border-rose-400' : 'border-neutral-400'
-              } focus:outline-none transition-all`}
+              } focus:outline-none focus:p-4 transition-all`}
             />
             {errors['name'] && (
               <label className="absolute right-1 top-1 text-rose-400 text-xs pointer-events-none">
@@ -153,7 +153,7 @@ const Page: FC<pageProps> = ({}) => {
               {...register('location', { required: true })}
               className={`appearance-none w-full bg-transparent border-b-2 ${
                 errors['location'] ? 'border-rose-400' : 'border-neutral-400'
-              } focus:outline-none transition-all text-neutral-700 dark:text-neutral-200 focus:bg-neutral-200 dark:focus:bg-neutral-900`}
+              } focus:outline-none transition-all text-neutral-700 dark:text-neutral-200 focus:bg-neutral-200 focus:p-4 dark:focus:bg-neutral-900`}
             >
               <option value="" disabled>
                 Provincia (ARG)
@@ -182,7 +182,7 @@ const Page: FC<pageProps> = ({}) => {
                 })}
                 className={`w-full bg-transparent border-b-2 ${
                   errors['foreign'] ? 'border-rose-400' : 'border-neutral-400'
-                } focus:outline-none transition-all`}
+                } focus:outline-none focus:p-4 transition-all`}
               />
               {errors['foreign'] && (
                 <label className="absolute right-1 top-1 text-rose-400 text-xs pointer-events-none">

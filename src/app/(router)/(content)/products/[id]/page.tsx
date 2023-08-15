@@ -1,9 +1,13 @@
+'use client'
+
 import { FC } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
-  return <div>page</div>
+const Page: FC<pageProps> = ({}) => {
+  const path = usePathname()?.split('/')[2] || null
+  return <div>{path}</div>
 }
 
-export default page
+export default Page
