@@ -8,12 +8,14 @@ import { signIn } from 'next-auth/react'
 import Title from '@/components/ui/Title'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
+import { UserSlice } from '@/store/userSlice'
 
 interface pageProps {}
 
 const Page: FC<pageProps> = ({}) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { getCurrentUser } = UserSlice()
 
   const {
     register,
@@ -36,7 +38,8 @@ const Page: FC<pageProps> = ({}) => {
       .then((callback) => {
         if (callback?.ok) {
           toast.success('Sesión iniciada')
-          router.refresh()
+          getCurrentUser()
+          router.push('/products')
         }
 
         if (callback?.error) {
@@ -80,7 +83,7 @@ const Page: FC<pageProps> = ({}) => {
               id="password"
               disabled={loading}
               placeholder="Contraseña"
-              {...register('name', { required: true })}
+              {...register('password', { required: true })}
               className={`w-full bg-transparent border-b-2 ${
                 errors['password'] ? 'border-rose-400' : 'border-neutral-400'
               } focus:outline-none transition-all`}

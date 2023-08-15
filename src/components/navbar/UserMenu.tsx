@@ -39,12 +39,12 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
           right-0
           z-20
           h-fit
-          w-32
+          w-40
           p-4
           flex
           flex-col
-          justify-start
-          items-center
+          justify-center
+          items-start
           bg-neutral-200
           dark:bg-neutral-900
           opacity-0
