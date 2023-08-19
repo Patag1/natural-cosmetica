@@ -30,13 +30,18 @@ const Themebtn: FC<ThemebtnProps> = ({}) => {
 
   return (
     <button
-      className="w-full h-full md:flex hidden justify-between items-center"
+      className="w-full h-full md:flex justify-between items-center hidden"
       onClick={handleTheme}
     >
-      <p>Tema</p>
-      <div className="text-xl">
-        {theme === 'dark' && mounted ? <BiMoon /> : <BiSun />}
+      <div className="w-fit [&>div]:hover:w-full md:[&>div]:active:w-0 [&>div]:active:w-full">
+        <p>Tema</p>
+        <div className="w-0 border-b-[1px] border-neutral-700 dark:border-neutral-200 transition-all duration-500"></div>
       </div>
+      {theme === 'dark' && mounted ? (
+        <BiMoon className="text-xl" />
+      ) : (
+        <BiSun className="text-xl" />
+      )}
     </button>
   )
 }

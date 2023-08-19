@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import prisma from '@/lib/prismadb'
+import {db} from '@/lib/prismadb'
 import { NextResponse } from 'next/server'
 
 const admins = ['victoriasasso@hotmail.com']
@@ -7,7 +7,7 @@ const admins = ['victoriasasso@hotmail.com']
 export async function POST(req: Request) {
   const { name, email, password, location } = await req.json()
 
-  const check = await prisma.user.findUnique({
+  const check = await db.user.findUnique({
     where: { email },
   })
 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
   const admin = admins.includes(email)
 
-  const user = await prisma.user.create({
+  const user = await db.user.create({
     data: {
       name,
       email,

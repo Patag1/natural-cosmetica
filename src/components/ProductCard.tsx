@@ -22,9 +22,9 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
   }
 
   return (
-    <Link href={`/products/${id}`} className="w-fit flex flex-col gap-6">
+    <Link href={`/products/${id}`} className="w-64 flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <div className="w-64 aspect-square border-2 border-black">
+        <div className="relative w-full aspect-square border-2 border-black">
           {/* <Image
             src={image}
             alt={id}
@@ -32,17 +32,16 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
             height={1}
             className="h-full w-auto object-cover"
           /> */}
+          <Title text={title} className="absolute bottom-2 left-2 wrap-balance" />
         </div>
         <div className="flex justify-between items-center">
-          <Title text={title} /> <p>${price}</p>
+          <Button
+            label="Agregar al carrito"
+            onClick={handleCart}
+            className="w-3/4"
+          />
+          <p className="text-sm tabular-nums">${price}</p>
         </div>
-      </div>
-      <div>
-        <Button
-          label="Agregar al carrito"
-          onClick={handleCart}
-          className="w-full"
-        />
       </div>
     </Link>
   )

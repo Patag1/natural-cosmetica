@@ -1,4 +1,4 @@
-import prisma from '@/lib/prismadb'
+import { db } from '@/lib/prismadb'
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
 
@@ -6,7 +6,7 @@ export async function GET({ params }: { params: { id: string } }) {
   try {
     const { id } = params
 
-    const user = await prisma.user.findUnique({
+    const user = await db.user.findUnique({
       where: {
         id,
       },
@@ -32,7 +32,7 @@ export async function PUT(
 
     const hashPass = await bcrypt.hash(pass, 12)
 
-    await prisma.user.update({
+    await db.user.update({
       where: {
         id,
       },
@@ -53,7 +53,7 @@ export async function DELETE({ params }: { params: { id: string } }) {
   try {
     const { id } = params
 
-    await prisma.user.delete({
+    await db.user.delete({
       where: {
         id,
       },

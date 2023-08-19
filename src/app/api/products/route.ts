@@ -1,9 +1,9 @@
-import prisma from '@/lib/prismadb'
-import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/lib/prismadb'
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const products = await prisma.product.findMany()
+    const products = await db.product.findMany()
 
     if (!products.length) {
       return NextResponse.json({ status: 404 })
@@ -15,17 +15,15 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const {
-      image,
-      title,
-      description,
-      ingredients,
-      price
-    } = await req.json()
+    const { image, title, description, ingredients, price } = await req.json()
 
-    await prisma.product.create({
+    if (!image || !title || !description || !ingredients || !price) {
+      return NextResponse.json({ status: 400 })
+    }
+
+    const newProduct = await db.product.create({
       data: {
         image,
         title,
@@ -36,7 +34,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    return NextResponse.json({ status: 200 })
+    return NextResponse.json({ newProduct }, { status: 200 })
   } catch (_error) {}
   return NextResponse.json({ status: 500 })
 }

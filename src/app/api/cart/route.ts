@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getCurrentUser } from '../user/route'
+import { db } from '@/lib/prismadb'
 
-export async function PUT(req: NextRequest) {
+export async function PUT(req: Request) {
   try {
     const { id, add } = await req.json()
 
@@ -23,7 +24,7 @@ export async function PUT(req: NextRequest) {
       updatedCart = user.cart.filter((productId) => productId !== id)
     }
 
-    await prisma?.user.update({
+    await db.user.update({
       where: { id: user.id },
       data: {
         cart: updatedCart,

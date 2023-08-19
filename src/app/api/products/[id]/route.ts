@@ -1,11 +1,12 @@
-import prisma from '@/lib/prismadb'
+import { db } from '@/lib/prismadb'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(req: Request) {
   try {
-    const { id } = params
+    const url = req.url.split('/')
+    const id = url[url.length - 1]
 
-    const product = await prisma.product.findUnique({
+    const product = await db.product.findUnique({
       where: {
         id,
       },
@@ -33,7 +34,7 @@ export async function PUT(
       await req.json()
     const { id } = params
 
-    await prisma.product.update({
+    await db.product.update({
       where: {
         id,
       },
@@ -56,7 +57,7 @@ export async function DELETE({ params }: { params: { id: string } }) {
   try {
     const { id } = params
 
-    await prisma.product.delete({
+    await db.product.delete({
       where: {
         id,
       },

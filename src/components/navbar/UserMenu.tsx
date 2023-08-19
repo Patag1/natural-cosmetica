@@ -24,11 +24,24 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
   return (
     <div
       className={`${
-        path === '/' &&
-        'bg-neutral-200 border-[1px] border-neutral-400  dark:bg-neutral-900 rounded-full'
-      } h-full p-2 relative [&>div]:hover:opacity-100 [&>div]:hover:pointer-events-auto`}
+        path === '/' && `
+        bg-neutral-200
+        border-[1px]
+        border-neutral-400 
+        dark:bg-neutral-900
+        rounded-3xl`
+      }
+        flex
+        justify-center
+        items-center
+        h-full
+        px-2
+        relative
+        [&>div]:hover:opacity-100
+        [&>div]:hover:pointer-events-auto
+      `}
     >
-      <div className="h-full flex items-center text-2xl">
+      <div className="flex justify-center items-center text-2xl">
         <AiOutlineUser />
         <RiArrowDropDownLine />
       </div>

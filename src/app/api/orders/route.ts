@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getCurrentUser } from '../user/route'
+import { db } from '@/lib/prismadb'
 
 export async function GET() {
   try {
@@ -9,7 +10,7 @@ export async function GET() {
       return NextResponse.json({ status: 401 })
     }
 
-    const orders = await prisma?.order.findMany({
+    const orders = await db.order.findMany({
       where: { userId: user.id },
     })
 

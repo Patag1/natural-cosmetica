@@ -13,3 +13,7 @@ img {
 .overflow-x-auto::-webkit-scrollbar {
   display: none;
 }
+
+.wrap-balance {
+  text-wrap: balance;
+}

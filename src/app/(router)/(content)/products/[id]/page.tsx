@@ -38,7 +38,7 @@ const Page: FC<pageProps> = ({ params }) => {
   }
 
   return (
-    <div className="mx-auto max-w-prose grid grid-cols-1 grid-rows-[auto_auto_auto]">
+    <div className="mx-auto max-w-prose grid grid-cols-1 grid-rows-[auto_auto_auto] gap-6">
       <div className="flex items-start gap-6">
         {/* <Image
           src={image}
@@ -47,33 +47,39 @@ const Page: FC<pageProps> = ({ params }) => {
           height={1}
           className="h-64 w-auto aspect-square object-cover"
         /> */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-8">
           <Title text={title} large />
-          <p>${price}</p>
+          <p>{description}</p>
         </div>
       </div>
-      <div>
-        <p>{description}</p>
+      <div className="flex flex-col gap-6">
         <div>
           <Title text="Ingredientes" />
           <ul>
-            {ingredients.map((ingredient, i) => (
+            {ingredients.split(',').map((ingredient, i) => (
               <li key={i}>
                 <p>{ingredient}</p>
               </li>
             ))}
           </ul>
         </div>
-        <Button label="Agregar al carrito" onClick={handleCart} />
+        <div>
+          <Title text="Hacé tu pedido" />
+          <div className="flex justify-between items-center w-full">
+            <Button label="Agregar al carrito" onClick={handleCart} />
+            <p>${price}</p>
+          </div>
+        </div>
       </div>
       <div>
-        {feedbacks?.length &&
-          feedbacks.map((f, i) => (
-            <div key={i}>
-              <p>{f.rating}</p>
-              <p>{f.content}</p>
-            </div>
-          ))}
+        {feedbacks?.length
+          ? feedbacks.map((f, i) => (
+              <div key={i}>
+                <p>{f.rating}</p>
+                <p>{f.content}</p>
+              </div>
+            ))
+          : []}
       </div>
     </div>
   )
