@@ -19,6 +19,8 @@ export async function GET(req: Request) {
       return NextResponse.json({ status: 404 })
     }
 
+    console.log(product)
+
     return NextResponse.json(product)
   } catch (_error) {
     return NextResponse.json({ status: 500 })

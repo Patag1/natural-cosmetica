@@ -6,13 +6,12 @@ import { RiArrowDropDownLine } from 'react-icons/ri'
 import ThemeBtn from '../ui/ThemeBtn'
 import Link from '../ui/Link'
 import { UserSlice } from '@/store/userSlice'
-import { usePathname } from 'next/navigation'
+import { signOut } from 'next-auth/react'
+import toast from 'react-hot-toast'
 
 interface UserMenuProps {}
 
 const UserMenu: FC<UserMenuProps> = ({}) => {
-  const path = usePathname()
-
   const { user, getCurrentUser } = UserSlice()
 
   useEffect(() => {
@@ -21,16 +20,15 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
     }
   }, [user, getCurrentUser])
 
+  const handleSignOut = () => {
+    signOut()
+      .then(() => toast.success('Gracias por visitarnos!'))
+      .catch(() => toast.error('Algo salió mal! Intentá de nuevo más tarde'))
+  }
+
   return (
     <div
-      className={`${
-        path === '/' && `
-        bg-neutral-200
-        border-[1px]
-        border-neutral-400 
-        dark:bg-neutral-900
-        rounded-3xl`
-      }
+      className="
         flex
         justify-center
         items-center
@@ -39,7 +37,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
         relative
         [&>div]:hover:opacity-100
         [&>div]:hover:pointer-events-auto
-      `}
+      "
     >
       <div className="flex justify-center items-center text-2xl">
         <AiOutlineUser />
@@ -72,17 +70,19 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
         {!user ? (
           <>
             <Link href="/login" label="Inicia sesión" />
-            <div className="border-b-[1px] border-gray-400 w-full my-4"></div>
+            <div className="border-b-[1px] border-gray-400 w-full my-4" />
             <Link href="/signup" label="Registrarse" />
           </>
         ) : (
           <>
             <Link href="/orders" label="Ordenes" />
-            <div className="border-b-[1px] border-gray-400 w-full my-4"></div>
-            <Link href="/signout" label="Cerrar sesión" />
+            <div className="border-b-[1px] border-gray-400 w-full my-4" />
+            <div onClick={handleSignOut}>
+              <Link href="/" label="Cerrar sesión" />
+            </div>
           </>
         )}
-        <div className="border-b-[1px] border-gray-400 w-full my-4"></div>
+        <div className="border-b-[1px] border-gray-400 w-full my-4" />
         <ThemeBtn />
       </div>
     </div>

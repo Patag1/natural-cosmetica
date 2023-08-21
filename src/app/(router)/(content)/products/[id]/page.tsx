@@ -3,7 +3,6 @@
 import { FC, useEffect } from 'react'
 import { ProductSlice } from '@/store/productSlice'
 // import Image from 'next/image'
-import { notFound } from 'next/navigation'
 import Title from '@/components/ui/Title'
 import Button from '@/components/ui/Button'
 import { OrderSlice } from '@/store/orderSlice'
@@ -22,7 +21,7 @@ const Page: FC<pageProps> = ({ params }) => {
     getProduct(id)
   }, [getProduct, id])
 
-  if (!product) return notFound()
+  if (!product) return null
 
   const {
     // image,

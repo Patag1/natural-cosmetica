@@ -1,9 +1,12 @@
 import { create } from 'zustand'
 import { dbOrder } from '@/types'
 import toast from 'react-hot-toast'
+import { Product } from '@prisma/client'
 
 interface OrderSliceProps {
+  cart: Product[] | []
   orders: dbOrder[] | []
+  getCart: () => Promise<void>
   toCart: (payload: { id: string; add: boolean }) => Promise<void>
   getOrders: () => Promise<void>
   toOrder: (payload: string | string[]) => Promise<void>
@@ -11,7 +14,13 @@ interface OrderSliceProps {
 }
 
 export const OrderSlice = create<OrderSliceProps>((set) => ({
+  cart: [],
   orders: [],
+  getCart: async () => {
+    await fetch('/api/cart')
+      .then((res) => res.json())
+      .then((data) => set({ cart: data }))
+  },
   toCart: async (payload) => {
     await fetch(`/api/cart`, {
       method: 'PUT',
