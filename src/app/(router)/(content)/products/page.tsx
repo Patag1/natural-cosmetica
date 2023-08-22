@@ -1,17 +1,11 @@
-'use client'
-
+import { FC } from 'react'
+import { db } from '@/lib/prismadb'
 import ProductCard from '@/components/ProductCard'
-import { ProductSlice } from '@/store/productSlice'
-import { FC, useEffect } from 'react'
 
 interface pageProps {}
 
-const Page: FC<pageProps> = ({}) => {
-  const { products, getProducts } = ProductSlice()
-
-  useEffect(() => {
-    getProducts()
-  }, [getProducts])
+const Page: FC<pageProps> = async ({}) => {
+  const products = await db.product.findMany()
 
   return (
     <div className="mx-auto w-fit grid grid-cols-3 grid-rows-2 items-center gap-8">

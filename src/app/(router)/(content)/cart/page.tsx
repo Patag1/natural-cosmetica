@@ -1,39 +1,55 @@
-'use client'
-
-import { FC, useEffect } from 'react'
-import { OrderSlice } from '@/store/orderSlice'
-import Image from 'next/image'
+import { FC } from 'react'
+// import Image from 'next/image'
+import { getCurrentUser } from '@/app/api/user/route'
+import { db } from '@/lib/prismadb'
+import { Product } from '@prisma/client'
+import ServerButton from '@/components/ui/ServerButton'
+import Hr from '@/components/ui/Hr'
 
 interface pageProps {}
 
-const Page: FC<pageProps> = ({}) => {
-  const { cart, getCart } = OrderSlice()
+const Page: FC<pageProps> = async ({}) => {
+  const user = await getCurrentUser()
 
-  useEffect(() => {
-    getCart()
-  }, [getCart])
+  if (!user) return null
 
-  if (!cart || !cart.length) return null
+  const { cart } = await db.user.findUnique({
+    where: { id: user.id },
+    select: { cart: true },
+  })
 
-  console.log(cart)
+  if (!cart.length || cart === null) return null
 
   return (
-    <ul>
-      {/* {cart.map((p, i) => (
-        <li className="flex gap-4" key={i}>
-          <Image
+    <ul className="mx-auto max-w-prose flex flex-col gap-4">
+      {cart.map((p: Product, i: number) => (
+        <li className="flex justify-between items-center gap-4" key={i}>
+          {/* <Image
             src={p.image}
             alt={p.id}
             width={1}
             height={1}
             className="w-8 aspect-square"
-          />
-          <div>
-            <p>{p.title}</p>
-            <span>{p.price}</span>
+          /> */}
+          <p>{p.title}</p>
+          <div className="flex items-center gap-2">
+            <span>${p.price}</span>
+            <ServerButton id={p.id} />
           </div>
         </li>
-      ))} */}
+      ))}
+      <Hr />
+      <li className="flex justify-between items-center gap-4">
+        <p>Total</p>
+        <div className="flex items-center gap-2">
+          <span>
+            ${cart.reduce((acc, p) => {
+              return acc + p.price
+            }, 0)}
+          </span>
+          <ServerButton id="" />
+        </div>
+      </li>
     </ul>
   )
 }

@@ -4,23 +4,14 @@ import { detailProduct } from '@/types'
 import toast from 'react-hot-toast'
 
 interface ProductSliceProps {
-  products: Product[] | []
   product: detailProduct | null
-  getProducts: () => Promise<void>
   getProduct: (payload: string) => Promise<void>
   putProduct: (payload: { id: string; data: Product }) => Promise<void>
   delProduct: (payload: string) => Promise<void>
 }
 
 export const ProductSlice = create<ProductSliceProps>((set) => ({
-  products: [],
   product: null,
-  getProducts: async () => {
-    await fetch('/api/products')
-      .then((res) => res.json())
-      .then((products) => set({ products }))
-      .catch(() => toast.error('Error! Trate denuevo más tarde'))
-  },
   getProduct: async (payload) => {
     await fetch(`/api/products/${payload}`)
       .then((res) => res.json())
@@ -41,11 +32,6 @@ export const ProductSlice = create<ProductSliceProps>((set) => ({
       method: 'DELETE',
     })
       .then((res) => res.json())
-      .then(() => {
-        set((state) => ({
-          products: state.products.filter((p) => p.id !== payload),
-        }))
-      })
       .then(() => toast.success('Producto borrado exitosamente!'))
       .catch(() => toast.error('Error! Trate denuevo más tarde'))
   },

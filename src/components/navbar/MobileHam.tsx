@@ -10,7 +10,7 @@ const MobileHam: FC<MobileHamProps> = ({}) => {
 
   return (
     <div
-      className={`fixed top-10 left-8 z-40 aspect-square w-8 flex flex-col justify-center items-center ${
+      className={`fixed md:hidden flex top-10 left-8 z-40 aspect-square w-8 flex-col justify-center items-center ${
         !menuIsOpen && 'gap-2'
       } transition-all duration-300 cursor-pointer`}
       onClick={toggleMenu}

@@ -3,30 +3,22 @@
 import { FC, useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { BiMoon, BiSun } from 'react-icons/bi'
-import { useMobile } from '@/store/useMobile'
 
 interface ThemebtnProps {}
 
 const Themebtn: FC<ThemebtnProps> = ({}) => {
   const [mounted, setMounted] = useState(false)
-  const { systemTheme, theme, setTheme } = useTheme()
-  const { isMobile } = useMobile()
+  const { resolvedTheme, setTheme } = useTheme()
 
   useEffect(() => {
-    if (!mounted && typeof window !== undefined) {
-      setMounted(true)
-    }
-
-    if (!isMobile) {
-      setTheme(systemTheme ?? 'light')
-    } else {
-      setTheme('light')
-    }
-  }, [isMobile, systemTheme, setTheme])
+    setMounted(true)
+  }, [])
 
   const handleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
+
+  if (!mounted) return null
 
   return (
     <button
@@ -37,7 +29,7 @@ const Themebtn: FC<ThemebtnProps> = ({}) => {
         <p>Tema</p>
         <div className="w-0 border-b-[1px] border-neutral-700 dark:border-neutral-200 transition-all duration-500"></div>
       </div>
-      {theme === 'dark' && mounted ? (
+      {resolvedTheme === 'dark' ? (
         <BiMoon className="text-xl" />
       ) : (
         <BiSun className="text-xl" />
