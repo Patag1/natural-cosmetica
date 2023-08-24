@@ -9,12 +9,12 @@ interface ServerButtonProps {
 }
 
 const ServerButton: FC<ServerButtonProps> = ({ id }) => {
-  const { delFromCart } = OrderSlice()
+  const { toCart } = OrderSlice()
 
   return (
     <Button
       label="Sacar del carrito"
-      onClick={() => delFromCart(id)}
+      onClick={() => toCart({ id, add: false })}
     />
   )
 }

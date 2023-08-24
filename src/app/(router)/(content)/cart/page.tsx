@@ -1,5 +1,4 @@
 import { FC } from 'react'
-// import Image from 'next/image'
 import { getCurrentUser } from '@/app/api/user/route'
 import { db } from '@/lib/prismadb'
 import { Product } from '@prisma/client'
@@ -24,13 +23,7 @@ const Page: FC<pageProps> = async ({}) => {
     <ul className="mx-auto max-w-prose flex flex-col gap-4">
       {cart.map((p: Product, i: number) => (
         <li className="flex justify-between items-center gap-4" key={i}>
-          {/* <Image
-            src={p.image}
-            alt={p.id}
-            width={1}
-            height={1}
-            className="w-8 aspect-square"
-          /> */}
+          <img src={p.image} alt={p.id} className="w-8 aspect-square" />
           <p>{p.title}</p>
           <div className="flex items-center gap-2">
             <span>${p.price}</span>
@@ -43,7 +36,8 @@ const Page: FC<pageProps> = async ({}) => {
         <p>Total</p>
         <div className="flex items-center gap-2">
           <span>
-            ${cart.reduce((acc, p) => {
+            $
+            {cart.reduce((acc: number, p: Product) => {
               return acc + p.price
             }, 0)}
           </span>

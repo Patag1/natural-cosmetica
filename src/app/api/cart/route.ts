@@ -6,8 +6,6 @@ export async function GET() {
   try {
     const user = await getCurrentUser()
 
-    console.log(user)
-
     if (!user) {
       return NextResponse.json({ status: 401 })
     }
@@ -16,8 +14,6 @@ export async function GET() {
       where: { id: user.id },
       select: { cart: true },
     })
-
-    console.log(cart)
 
     return NextResponse.json(cart)
   } catch (_error) {
@@ -66,7 +62,7 @@ export async function PUT(req: Request) {
     await db.user.update({
       where: { id: user.id },
       data: {
-        cart: { connect: updatedCart },
+        cart: { set: updatedCart },
       },
     })
 
