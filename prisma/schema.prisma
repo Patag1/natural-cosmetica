@@ -33,6 +33,7 @@ model Product {
   description String
   ingredients String
   price       Float
+  unities     Int
   buys        Int
 
   User      User[]
